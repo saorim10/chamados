@@ -1,16 +1,38 @@
 package br.com.jsm.chamados.models;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import br.com.jsm.chamados.types.StUsuarioType;
 
+@Entity
+@Table(name = "USUARIO")
 public class UsuarioModel {
+	// ------------------------------------------------
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUsuario;
+	// ------------------------------------------------
 	private String nmUsuario;
 	private String nrTelefone;
 	private String dsEmail;
+	// ------------------------------------------------
+	@OneToOne
+	@JoinColumn(name = "idSetor")
 	private SetorModel setor;
+	// ------------------------------------------------
 	private String dsSenha;
+	// ------------------------------------------------
+	@Enumerated(EnumType.ORDINAL)
 	private StUsuarioType stUsuario;
-	
+	// ------------------------------------------------
 	
 	
 	

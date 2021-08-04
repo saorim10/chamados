@@ -3,18 +3,45 @@ package br.com.jsm.chamados.models;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import br.com.jsm.chamados.types.StChamadoType;
 
+@Entity
+@Table(name = "CHAMADO")
 public class ChamadoModel {
-
+	// -----------------------------------------------------
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idChamado;
+	// -----------------------------------------------------
 	private String dsChamado;
+	// -----------------------------------------------------
+	@OneToOne
+	@JoinColumn(name="idUsuario")
 	private UsuarioModel usuarioSolicitante;
+	// -----------------------------------------------------
+	@OneToOne
+	@JoinColumn(name="idSetor")
 	private SetorModel setorDestino;
+	// -----------------------------------------------------
+	@Enumerated(EnumType.ORDINAL)
 	private StChamadoType stChamado;
+	// -----------------------------------------------------
 	private Date dtChamado;
+	// -----------------------------------------------------
+	@OneToMany(mappedBy = "chamado")
 	private Collection<AcompanhamentoModel> acompanhamentos;
-	
+	// -----------------------------------------------------
 	
 	// ****** Getters & Setters
 	
